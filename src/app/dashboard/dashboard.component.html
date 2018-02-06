@@ -1,0 +1,107 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-nav-tabs">
+                    <div class="card-header" data-background-color="purple">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Search By:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#profile" data-toggle="tab">
+                                            <i class="material-icons">wb_sunny</i>
+                                            Martian Sol
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#messages" data-toggle="tab">
+                                            <i class="material-icons">today</i>
+                                            Earth Date
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">Sol</label>
+                                        <input type="email" class="form-control" [(ngModel)]="sol">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <button type="submit" (click)="getPhotosBySol(sol)" class="btn btn-primary">Search</button>
+                                    <br/>
+                                    <br/>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">From</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <br/>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div *ngIf="autorenew">
+                <div class="loader">
+                    <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                    </svg>
+                </div>
+            </div>
+            <div *ngFor="let photo of nasaPhotos">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header card-chart" data-background-color="orange">
+                            <img [src]="photo.img_src">
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title">Sol</h4>
+                            <p class="category">Photos</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">camera</i> camera
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="nasaPhotos && nasaPhotos.length > 0" class="row">
+            <div class="col-md-6">
+                <ul class="pagination">
+                    <li>
+                        <button class="btn btn-default" [disabled]="isCurrentPageOne()" (click)="getPrevious(sol)"> PREV
+                            <div class="ripple-container"></div>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btn btn-default" (click)="getNext(sol)"> NEXT
+                            <div class="ripple-container"></div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
